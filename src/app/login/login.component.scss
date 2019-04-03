@@ -1,0 +1,27 @@
+.mat-form-field {
+    width: 100%;
+}
+
+.or-line {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-left: 25%;
+    border-top: 1px solid #000;
+    width: 50%;
+    opacity: 0.2;
+    p {
+        margin-top: -16px;
+        background: #fff;
+        padding: 2px 8px;
+    }
+}
+
+.social-auth {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    .item {
+        margin-bottom: 15px;
+    }
+}

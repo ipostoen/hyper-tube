@@ -1,0 +1,48 @@
+<div class="container myh-100">
+  <div class="row h-100 align-items-center justify-content-center">
+    <div class="box-wrap col-12 col=sm-8 col-md-7 shadow-wrap text-center">
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h4>Sing In</h4>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="Username" formControlName="username">
+          <mat-error *ngIf="f.username.errors && f.username.errors.required">Email is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Password" formControlName="password">
+          <mat-error *ngIf="f.password.errors && f.password.errors.required">Password is required.</mat-error>
+          <mat-error *ngIf="f.password.errors && f.password.errors.minlength">Password must have 6 chars.</mat-error>
+        </mat-form-field>
+
+        <div class="submit">
+          <button mat-raised-button color="accent">Accent</button>
+        </div>
+        
+        <a [routerLink]="['/reset-password']" routerLinkActive="router-link-active" >Forgot your password?</a>
+
+      </form>
+
+      <div class="or-line">
+        <p>or</p>
+      </div>
+
+      <div class="social-auth">
+        <div class="item">
+          <button mat-raised-button color="primary" [routerLink]="['/register']">Sing UP</button>
+        </div>
+        <div class="item">
+          <button mat-raised-button id="googleBtn" color="google"><i class="fab fa-google-plus-g"></i> Google
+            account</button>
+        </div>
+        <div class="item">
+          <button mat-raised-button color="facebook" (click)="loginIntra()">Intra</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

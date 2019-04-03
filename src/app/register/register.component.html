@@ -1,0 +1,56 @@
+<div class="container myh-100">
+  <div class="row h-100 align-items-center justify-content-center">
+    <div class="box-wrap col-12 col=sm-8 col-md-7 shadow-wrap text-center">
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <h4>Sing Up</h4>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Username" formControlName="username">
+            <mat-error *ngIf="f.username.errors && f.username.errors.required">Username is required.</mat-error>
+            <mat-error *ngIf="f.username.errors && f.username.errors.minlength">Username must have 6 chars.</mat-error>
+            <mat-error *ngIf="f.username.errors && f.username.errors.Duplicate">Username is duplicate.</mat-error>
+          </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>First name</mat-label>
+          <input matInput placeholder="First name" formControlName="firstname">
+          <mat-error *ngIf="f.firstname.errors && f.firstname.errors.required">First name is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Last name</mat-label>
+          <input matInput placeholder="Last name" formControlName="lastname">
+          <mat-error *ngIf="f.lastname.errors && f.lastname.errors.required">Last name is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" formControlName="email">
+          <mat-error *ngIf="f.email.errors && f.email.errors.required">Email is required.</mat-error>
+          <mat-error *ngIf="f.email.errors && f.email.errors.email">Email is not valid.</mat-error>
+          <mat-error *ngIf="f.email.errors && f.email.errors.Duplicate">Email is duplicate.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Password" formControlName="password">
+          <mat-error *ngIf="f.password.errors && f.password.errors.required">Password is required.</mat-error>
+          <mat-error *ngIf="f.password.errors && f.password.errors.minlength">Password must have 6 chars.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Confirm password</mat-label>
+          <input matInput type="password" placeholder="Confirm password" formControlName="confirmPassword">
+          <mat-error *ngIf="f.confirmPassword.errors && f.confirmPassword.errors.required">Confirm password is required.
+          </mat-error>
+          <mat-error *ngIf="f.confirmPassword.errors && f.confirmPassword.errors?.matchPassword">Password dont match.</mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="accent">Accent</button>
+      </form>
+
+    </div>
+  </div>
+</div>

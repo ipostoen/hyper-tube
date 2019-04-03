@@ -1,0 +1,145 @@
+<section class="main dark" *ngIf="movie">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="poster text-center">
+          <img [src]="poster" alt="{{movie.title}}" srcset="">
+        </div>
+      </div>
+      <div class="col-md-8">
+        <h3 class="wrap">{{movie.title}} <span>({{date}})</span></h3>
+
+        <div class="ganres wrap">
+          <h5>Genres:</h5>
+          <mat-chip-list>
+            <mat-chip color="accent" selected *ngFor="let item of movie.genres">{{item.name}}</mat-chip>
+          </mat-chip-list>
+        </div>
+
+        <div class="text-inf wrap">
+          <h5>Rating:</h5>
+          <p>{{movie.grade}}</p>
+        </div>
+
+        <div class="text-inf wrap">
+          <h5>Length:</h5>
+          <p>{{movie.runtime}}</p>
+        </div>
+
+        <div class="overview wrap">
+          <h5>Overview:</h5>
+          <p>{{movie.overview}}</p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<section class="cast gray" *ngIf="movie">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h5>Cast:</h5>
+
+        <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
+          <mat-list>
+            <mat-list-item *ngFor="let p of movie.credits.cast">
+              <img matListAvatar *ngIf="p.profile_path" src="http://image.tmdb.org/t/p/original{{p.profile_path}}">
+              <h4 mat-line>{{p.name}}</h4>
+              <p mat-line> {{p.character}} </p>
+              <mat-divider *ngIf="!last"></mat-divider>
+
+            </mat-list-item>
+          </mat-list>
+        </cdk-virtual-scroll-viewport>
+
+      </div>
+      <div class="col-md-6">
+        <h5>Crew:</h5>
+
+        <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
+          <mat-list>
+            <mat-list-item *ngFor="let p of movie.credits.crew">
+              <img matListAvatar *ngIf="p.profile_path" src="http://image.tmdb.org/t/p/original{{p.profile_path}}">
+              <h4 mat-line>{{p.name}}</h4>
+              <p mat-line> {{p.job}} </p>
+              <mat-divider *ngIf="!last"></mat-divider>
+
+            </mat-list-item>
+          </mat-list>
+        </cdk-virtual-scroll-viewport>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="s-video" *ngIf="movie">
+
+  <div class="container">
+    <div class="row text-center">
+      <div class="col" *ngIf="movie.torrents">
+
+        <video class="video" [src]="streamUrl" controls controlsList="nodownload" crossorigin="anonymous" #video>
+        </video>
+
+        <button mat-button (click)="setQuality('1080')">1080</button>
+        <button mat-button (click)="setQuality('720')">720</button>
+
+      </div>
+
+      <div class="col" *ngIf="!movie.torrents">
+        Coming soon!
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="s-comments" *ngIf="movie">
+
+  <div class="container comments" *ngIf="comment">
+    <div class="row">
+      <div class="col">
+        <h5>Comments:</h5>
+
+        <cdk-virtual-scroll-viewport itemSize="50" class="viewport viewport-c">
+          <mat-list>
+            <mat-list-item *ngFor="let p of comment">
+              <img matListAvatar *ngIf="p.userId.avatar" src="http://image.tmdb.org/t/p/original{{p.userId.avatar}}">
+              <h4 mat-line><strong>{{p.userId.firstname}} {{p.userId.lastname}}</strong></h4> <p>time</p>
+              <p mat-line style="word-wrap: break-word!important;white-space: pre-wrap;"> {{p.comment}}</p>
+              <mat-divider *ngIf="!last"></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </cdk-virtual-scroll-viewport>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container input-comments">
+    <div class="row">
+      <div class="col text-right">
+
+        <form [formGroup]="commentsForm" (ngSubmit)="sendComments()">
+
+          <mat-form-field class="comments-form" appearance="outline">
+            <textarea class="w-100" style="height:100px" matInput placeholder="Leave a comment"
+              formControlName="comment"></textarea>
+          </mat-form-field>
+          
+          <button mat-raised-button color="accent">Send</button>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+</section>
